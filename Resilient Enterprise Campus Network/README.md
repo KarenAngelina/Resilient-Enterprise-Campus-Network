@@ -7,7 +7,7 @@ access switches, centrally managed Wi-Fi, and VoIP.
 
 ## Topology
 
-![Logical topology](screenshots/logical-view.png)
+![Logical topology](screenshots/logical_view.png)
 
 ## Design at a glance
 
