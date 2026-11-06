@@ -37,18 +37,18 @@ These are lab-only credentials used in the simulation.
 Just press enter for firewalls
 
 ## WiFi credentials:
-WLC Login - Username : karen, password: Cisco@123
-AUDITORS - Cisco@123
-EMPLOYEES - Cisco@123
-CORPORATE - Cisco@123
-GUEST - Cisco@123
+WLC Login - Username: karen ; password: Cisco@123,
+AUDITORS - Cisco@123,
+EMPLOYEES - Cisco@123,
+CORPORATE - Cisco@123,
+GUEST - Cisco@123,
 
 ## How to log in
 
 - **Console:** click a switch in Packet Tracer, open the CLI tab, enter
   the console password, then type `enable` and the enable password.
 - **SSH:** SSH is allowed only from the management network
-  (192.168.10.0/24). From a PC command prompt in that network:
+  (192.168.10.0/24). From Senior Network Engineer's PC command prompt in that network:
   `ssh -l karen <switch management IP>`
 
 ## Requirements coverage
