@@ -1,4 +1,4 @@
-# Secure Company Network: Design and Implementation
+# Resilient Enterprise Campus Network
 
 A resilient, hierarchical enterprise network designed and simulated in
 **Cisco Packet Tracer 8.2.2**. It has two ISP uplinks, a pair of perimeter
@@ -33,10 +33,10 @@ These are lab-only credentials used in the simulation.
 | Enable mode | none | cisco |
 | SSH | karen | cisco |
 
-
-Just press enter for firewalls
+## Just press Enter for Firewalls
 
 ## WiFi credentials:
+
 WLC Login - Username: karen ; password: Cisco@123,
 AUDITORS - Cisco@123,
 EMPLOYEES - Cisco@123,
@@ -77,7 +77,7 @@ GUEST - Cisco@123,
 ```
 .
 ├── README.md
-├── secure_company_network.pkt     
+├── Resilient_Enterprise_Campus_Network.pkt     
 ├── screenshots/
 ├── docs/
 │   ├── ip-addressing-plan.md
@@ -93,7 +93,7 @@ GUEST - Cisco@123,
 ## How to open
 
 1. Install Cisco Packet Tracer 8.2.2 or newer.
-2. Open `secure_company_network.pkt`.
+2. Open `Resilient Enterprise Campus Network.pkt`.
 
 
 ## Author
