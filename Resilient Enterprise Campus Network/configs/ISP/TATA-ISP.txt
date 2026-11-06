@@ -1,0 +1,31 @@
+hostname TATA-ISP
+!
+spanning-tree mode pvst
+!
+interface GigabitEthernet0/0
+ ip address 105.100.50.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 105.100.50.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 20.20.20.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 36
+ router-id 3.3.3.3
+ log-adjacency-changes
+ network 20.20.20.0 0.0.0.3 area 0
+ network 105.100.50.0 0.0.0.3 area 0
+ network 105.100.50.4 0.0.0.3 area 0
+!
+write memory

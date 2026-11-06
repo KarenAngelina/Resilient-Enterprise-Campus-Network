@@ -1,0 +1,114 @@
+! =====================================================================
+! CISCO VOIP GATEWAY  (2811)
+! Voice VLAN 70, subnet 172.30.0.0/16, phones 501-509
+! =====================================================================
+hostname VOIP-ROUTER
+enable password 7 0822455D0A16
+ip dhcp pool VOIP-POOL
+ network 172.30.0.0 255.255.0.0
+ default-router 172.30.0.1
+ option 150 ip 172.30.0.1
+!
+username karen password 7 0822455D0A16
+!
+license udi pid CISCO2811/K9 sn FTX101779HZ-
+ip ssh version 2
+no ip domain-lookup
+ip domain-name securenetwork.com
+!
+spanning-tree mode pvst
+!
+interface FastEthernet0/0.70
+ encapsulation dot1Q 70
+ ip address 172.30.0.1 255.255.0.0
+!
+!
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 deny any
+!
+banner motd #No unauth access#
+!
+telephony-service
+ max-ephones 30
+ max-dn 30
+ ip source-address 172.30.0.1 port 2000
+ auto assign 1 to 30
+!
+ephone-dn 1
+ number 501
+!
+ephone-dn 2
+ number 502
+!
+ephone-dn 3
+ number 503
+!
+ephone-dn 4
+ number 504
+!
+ephone-dn 5
+ number 505
+!
+ephone-dn 6
+ number 506
+!
+ephone-dn 7
+ number 507
+!
+ephone-dn 8
+ number 508
+!
+ephone-dn 9
+ number 509
+!
+ephone 1
+ device-security-mode none
+ mac-address 0001.4279.A102
+ type 7960
+ button 1:1
+!
+ephone 2
+ device-security-mode none
+ mac-address 00E0.8F97.B17B
+ type 7960
+ button 1:2
+!
+ephone 3
+ device-security-mode none
+ mac-address 0060.2F08.38BB
+ type 7960
+ button 1:3
+!
+ephone 4
+ device-security-mode none
+ mac-address 0007.EC0C.E7E4
+ type 7960
+ button 1:4
+!
+ephone 5
+ device-security-mode none
+ mac-address 0001.43C9.7773
+ type 7960
+ button 1:5
+!
+line con 0
+ exec-timeout 5 30
+ password 7 0822455D0A16
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ access-class 1 in
+ login local
+ transport input ssh
+line vty 5 15
+ access-class 1 in
+ login local
+ transport input ssh
+!
+!
+!
+end
+write memory

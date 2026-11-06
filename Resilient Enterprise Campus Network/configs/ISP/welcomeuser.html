@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Karen's Portal</title>
+</head>
+<body bgcolor="#eef3f8">
+
+<h1>You are now in Karen's Portal</h1>
+
+<p>Welcome! This portal is hosted on the DMZ web server of the
+<b>Resilient Enterprise Campus Network</b>, a secure and highly available
+enterprise network designed and simulated in Cisco Packet Tracer.</p>
+
+<h2>About the project</h2>
+<p>The network is built in a hierarchical model with redundancy at every
+layer, two internet providers, a firewall-protected DMZ, centrally managed
+Wi-Fi and VoIP.</p>
+
+<h2>What's inside</h2>
+<table border="1" cellpadding="6">
+<tr><th>Component</th><th>Count</th><th>Details</th></tr>
+<tr><td>Routers</td><td>5</td><td>2 ISP routers, 2 simulated internet user routers, 1 voice gateway</td></tr>
+<tr><td>Firewalls</td><td>2</td><td>Cisco ASA pair with INSIDE, DMZ and OUTSIDE zones</td></tr>
+<tr><td>Core switches</td><td>2</td><td>Multilayer, HSRP, LACP EtherChannel, OSPF</td></tr>
+<tr><td>Access switches</td><td>7</td><td>5 departments, 1 server farm, 1 DMZ</td></tr>
+<tr><td>Wireless</td><td>1 WLC, 5 APs</td><td>One access point per department</td></tr>
+<tr><td>Servers</td><td>8</td><td>DMZ: FTP, Web, Email, App, Storage. Inside: DHCP, DNS, RADIUS</td></tr>
+<tr><td>IP phones</td><td>5</td><td>Extensions 501 to 509</td></tr>
+</table>
+
+<h2>Key technologies</h2>
+<ul>
+<li>VLANs 10 (Management), 20 (LAN), 50 (WLAN), 70 (VoIP), 90 (Servers), 199 (Blackhole)</li>
+<li>HSRP gateway redundancy and PVST root placement</li>
+<li>OSPF routing on firewalls, routers and multilayer switches</li>
+<li>LACP EtherChannel between core switches</li>
+<li>Dual-ISP internet with NAT/PAT on the ASA firewalls</li>
+<li>DMZ for public servers, with firewall access rules</li>
+<li>SSH remote management restricted by access list</li>
+<li>PortFast and BPDU Guard on access ports</li>
+</ul>
+
+<hr>
+<p><i>Designed and built by Karen.</i></p>
+
+</body>
+</html>

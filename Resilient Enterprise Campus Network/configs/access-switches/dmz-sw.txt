@@ -1,0 +1,77 @@
+hostname DMZ-SW
+service password-encryption
+
+!
+enable password 7 0822455D0A16
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name securenetwork.com
+!
+username karen privilege 1 password 7 0822455D0A16
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/5
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet0/1
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan19
+ ip address 10.11.11.15 255.255.255.224
+!
+banner motd #NO AUTHORISED ACCESS#
+!
+!
+!
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 deny any
+line con 0
+ password 7 0822455D0A16
+ logging synchronous
+ login
+ exec-timeout 5 30
+!
+line vty 0 4
+ access-class 1 in
+ login
+ transport input ssh
+line vty 5 15
+ access-class 1 in
+ login
+ transport input ssh
+!
+!
+!
+!
+end

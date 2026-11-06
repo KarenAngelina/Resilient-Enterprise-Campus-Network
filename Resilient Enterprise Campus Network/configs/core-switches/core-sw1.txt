@@ -1,0 +1,156 @@
+! =====================================================================
+! CORE-SW1 (called SW-1 in the notes)
+! Multilayer switch: inter-VLAN routing, HSRP, STP root, OSPF
+! HSRP/STP intent: SW1 = active/root for VLAN 10 and 20
+!                  SW2 = active/root for VLAN 50, 70 and 90
+! 10.11.11.38 = DHCP server (DHCP relay target for client VLANs)
+! =====================================================================
+hostname CORE-SW1
+service password-encryption
+ip routing
+!
+username karen password 7 0822455D0A16
+!
+interface Loopback1
+ ip address 100.100.100.100 255.255.255.255
+!
+spanning-tree mode pvst
+spanning-tree vlan 10,20 priority 24576
+spanning-tree vlan 50,70,90 priority 28672
+!
+interface Port-channel1
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/1
+ no switchport
+ ip address 10.2.2.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/2
+ no switchport
+ ip address 10.2.2.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/3
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/4
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/5
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/6
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/7
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/8
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/9
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/10
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/11
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 1 mode active
+!
+!
+interface Vlan10
+ mac-address 00e0.8f42.8801
+ ip address 192.168.10.2 255.255.255.0
+ ip helper-address 10.11.11.38
+ standby 10 ip 192.168.10.1
+ standby 10 priority 150
+ standby 10 preempt
+!
+interface Vlan20
+ mac-address 00e0.8f42.8802
+ ip address 172.16.0.2 255.255.0.0
+ ip helper-address 10.11.11.38
+ standby 20 ip 172.16.0.1
+ standby 20 priority 150
+ standby 20 preempt
+!
+interface Vlan50
+ mac-address 00e0.8f42.8803
+ ip address 10.20.0.2 255.255.0.0
+ ip helper-address 10.11.11.38
+ standby 50 ip 10.20.0.1
+ standby 50 preempt
+!
+interface Vlan90
+ mac-address 00e0.8f42.8804
+ ip address 10.11.11.34 255.255.255.224
+ standby 90 ip 10.11.11.33
+ standby 90 preempt
+!
+router ospf 35
+ router-id 1.1.1.1
+ log-adjacency-changes
+ network 10.2.2.0 0.0.0.3 area 0
+ network 10.2.2.4 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 172.16.0.0 0.0.255.255 area 0
+ network 10.11.11.32 0.0.0.31 area 0
+ network 10.20.0.0 0.0.255.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 deny any
+!
+banner motd #NO AUTHORISED ACCESS#
+!
+!
+line con 0
+ exec-timeout 5 30
+ password 7 0822455D0A16
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ access-class 1 in
+ login local
+ transport input ssh
+line vty 5 15
+ access-class 1 in
+ login local
+ transport input ssh
+!
+ router ospf 35
+ router-id 2.2.2.2
+ network 10.2.2.8 0.0.0.3 area 0
+ network 10.2.2.12 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 172.16.0.0 0.0.255.255 area 0
+ network 10.20.0.0 0.0.255.255 area 0
+ network 10.11.11.32 0.0.0.31 area 0
+!
+!end!
+
+end
+write memory

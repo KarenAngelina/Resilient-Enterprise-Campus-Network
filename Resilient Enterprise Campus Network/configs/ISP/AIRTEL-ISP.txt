@@ -1,0 +1,31 @@
+hostname AIRTEL-ISP
+!
+spanning-tree mode pvst
+!
+interface GigabitEthernet0/0
+ ip address 197.200.100.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 197.200.100.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 30.30.30.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 38
+ router-id 4.4.4.4
+ log-adjacency-changes
+ network 30.30.30.0 0.0.0.3 area 0
+ network 197.200.100.0 0.0.0.3 area 0
+ network 197.200.100.4 0.0.0.3 area 0
+!
+write memory
